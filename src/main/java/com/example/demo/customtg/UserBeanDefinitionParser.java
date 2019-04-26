@@ -13,6 +13,7 @@ public class UserBeanDefinitionParser extends AbstractSingleBeanDefinitionParser
 
     @Override
     protected void doParse(Element element, BeanDefinitionBuilder builder) {
+        //提取元素名称
         String id = element.getAttribute("id");
         String userName = element.getAttribute("userName");
         String email = element.getAttribute("email");
