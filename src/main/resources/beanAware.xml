@@ -7,6 +7,7 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:task="http://www.springframework.org/schema/task"
 	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:myname="http://www.zzq.com/schema/user"
 	   xsi:schemaLocation="
     	http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -19,20 +20,9 @@
 		http://www.springframework.org/schema/jee
 		http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
 		http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-	<context:component-scan base-package="com.example.demo.event"/>
-	<bean id="teacher" class="com.example.demo.lookup.Teacher" scope="prototype">
-		<replaced-method name="showMe" replacer="replaceTeacher"></replaced-method>
-	</bean>
-	<bean id="student" class="com.example.demo.lookup.Student" scope="prototype">
-	</bean>
-	<bean id="student1" class="com.example.demo.lookup.Student" scope="singleton"></bean>
-
-	<bean id="replaceTeacher" class="com.example.demo.replacemethod.ReplaceTeacher"></bean>
-
-	<bean id="getuser" class="com.example.demo.lookup.AbstactUser">
-		<!--<lookup-method name="getUser" bean="teacher"></lookup-method>-->
-		<lookup-method name="getUser" bean="teacher"></lookup-method>
-	</bean>
-
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.zzq.com/schema/user
+        http://www.zzq.com/schema/user.xsd
+">
+	<myname:user id="zzq01" userName="zzq" email="zzq@qq.com"/>
 </beans>
