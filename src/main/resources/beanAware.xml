@@ -24,5 +24,5 @@
         http://www.zzq.com/schema/user
         http://www.zzq.com/schema/user.xsd
 ">
-	<myname:user id="zzq01" userName="zzq" email="zzq@qq.com"/>
+	<context:component-scan base-package="com.example.demo.aware"></context:component-scan>
 </beans>

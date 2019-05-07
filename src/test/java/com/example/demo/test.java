@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.aware.TestAware;
 import com.example.demo.byType.BytypeA;
 import com.example.demo.customtg.User;
 import com.example.demo.event.TestExample;
@@ -59,5 +60,13 @@ public class test {
         System.out.println(applicationContext.isSingleton("bytypeA"));
         bean.aaa();
         System.out.println(111);
+    }
+
+    @Test
+    public void bb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanAware.xml");
+        TestAware bean = applicationContext.getBean(TestAware.class);
+       bean.awareHello();
+       applicationContext.registerShutdownHook();
     }
 }

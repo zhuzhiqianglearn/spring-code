@@ -1,10 +1,11 @@
 package com.example.demo.aware;
 
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.beans.factory.*;
+import org.springframework.stereotype.Component;
 
-public class TestAware implements BeanFactoryAware {
+@Component
+public class TestAware implements BeanFactoryAware,BeanNameAware,InitializingBean,DisposableBean {
 
     private BeanFactory beanFactory;
 
@@ -18,4 +19,19 @@ public class TestAware implements BeanFactoryAware {
         bean.say();
     }
 
+    @Override
+    public void setBeanName(String name) {
+        System.out.println("------------------"+name);
+    }
+
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        System.out.println("11111111111111111");
+    }
+
+    @Override
+    public void destroy() throws Exception {
+        System.out.println(12312);
+
+    }
 }
