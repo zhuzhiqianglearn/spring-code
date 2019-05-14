@@ -7,6 +7,7 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
 	   xmlns:task="http://www.springframework.org/schema/task"
 	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:myname="http://www.zzq.com/schema/user"
 	   xsi:schemaLocation="
     	http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -19,24 +20,22 @@
 		http://www.springframework.org/schema/jee
 		http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
 		http://www.springframework.org/schema/task
-		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
-	<!--<bean id="xunHuanA" class="com.example.demo.xunhuan.XunHuanA">-->
-		<!--<constructor-arg index="0" ref="xunHuanB"></constructor-arg>-->
-	<!--</bean>-->
-	<!--<bean id="xunHuanB" class="com.example.demo.xunhuan.XunHuanB">-->
-		<!--<constructor-arg index="0" ref="xunHuanA"></constructor-arg>-->
-	<!--</bean>-->
-	<!--<bean id="xunhuanc" class="com.example.demo.xunhuan.XunHuanC" scope="prototype">-->
-		<!--<property name="xunHuanD" ref="xunhuand"></property>-->
-	<!--</bean>-->
-	<!--<bean id="xunhuand" class="com.example.demo.xunhuan.XunHuanD" scope="prototype">-->
-		<!--<property name="xunHuanC" ref="xunhuanc"></property>-->
-	<!--</bean>-->
-	<!--<bean id="xunhuanc" class="com.example.demo.xunhuan.XunHuanC">-->
-		<!--<property name="xunHuanD" ref="xunhuand"></property>-->
-	<!--</bean>-->
-	<!--<bean id="xunhuand" class="com.example.demo.xunhuan.XunHuanD" autowire="byName">-->
-		<!--<property name="xunHuanC" ref="xunhuanc"></property>-->
-	<!--</bean>-->
-	<context:component-scan base-package="com.example.demo.xunhuan"></context:component-scan>
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd
+        http://www.zzq.com/schema/user
+        http://www.zzq.com/schema/user.xsd
+">
+	  <bean id="mybfbp" class="com.example.demo.beanFactoryPostProcessor.MyBeanFactoryPostProcessor">
+		  <property name="obscenties">
+			  <set>
+				  <value>GYB</value>
+				  <value>ZZQ</value>
+				  <value>ZQK</value>
+				  <value>LD</value>
+			  </set>
+		  </property>
+	  </bean>
+	<bean id="testDemo" class="com.example.demo.beanFactoryPostProcessor.TestDemo">
+		<property name="age" value="12"/>
+		<property name="name" value="zzqew"/>
+	</bean>
 </beans>

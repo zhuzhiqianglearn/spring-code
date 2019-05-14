@@ -2,10 +2,15 @@ package com.example.demo.aware;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TestAware implements BeanFactoryAware,BeanNameAware,InitializingBean,DisposableBean {
+
+    @Autowired
+    private Hello hello;
+
 
     private BeanFactory beanFactory;
 

@@ -1,16 +1,26 @@
 package com.example.demo;
 
 import com.example.demo.aware.TestAware;
+import com.example.demo.beanFactoryPostProcessor.TestDemo;
+import com.example.demo.beanspel.BeanspelB;
 import com.example.demo.byType.BytypeA;
+import com.example.demo.customapplication.MyApplication;
 import com.example.demo.customtg.User;
 import com.example.demo.event.TestExample;
 import com.example.demo.lookup.AbstactUser;
 import com.example.demo.lookup.LookUpCOnfig;
+import com.example.demo.property.PropertyA;
 import com.example.demo.xunhuan.XunHuanF;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.expression.ExpressionParser;
+import org.springframework.expression.spel.standard.SpelExpressionParser;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class test {
     public static void main(String[] args) {
@@ -68,5 +78,78 @@ public class test {
         TestAware bean = applicationContext.getBean(TestAware.class);
        bean.awareHello();
        applicationContext.registerShutdownHook();
+    }
+    @Test
+    public void bbb(){
+        ClassPathXmlApplicationContext applicationContext=new MyApplication("classpath:beanAware.xml");
+        TestAware bean = applicationContext.getBean(TestAware.class);
+        bean.awareHello();
+        applicationContext.registerShutdownHook();
+    }
+    @Test
+    public void bbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanSpel.xml");
+        BeanspelB bean = applicationContext.getBean(BeanspelB.class);
+        bean.say();
+        applicationContext.registerShutdownHook();
+    }
+
+    @Test
+    public void bbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanProperty.xml");
+        PropertyA bean = applicationContext.getBean(PropertyA.class);
+        System.out.println(bean.getAge());
+        applicationContext.registerShutdownHook();
+    }
+    @Test
+    public void bbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanFactoryPostProcess.xml");
+        TestDemo bean = applicationContext.getBean(TestDemo.class);
+        System.out.println(bean.toString());
+        applicationContext.registerShutdownHook();
+    }
+    @Test
+    public void bbbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanPostProcess.xml");
+        TestDemo bean = applicationContext.getBean(TestDemo.class);
+        System.out.println(bean.toString());
+        applicationContext.registerShutdownHook();
+    }
+    @Test
+    public void c(){
+        List<String> names=new ArrayList<>();
+        names.add("1");
+        names.add("2");
+        names.add("3");
+        names.add("4");
+        names.remove(2);
+        names.add(2,"6");
+        System.out.println(Arrays.toString(names.toArray()));
+//        List<String> value=new ArrayList<>();
+//
+//        //M0 YQ
+//        int index=names.indexOf("3");
+//        value.get(index).s;
+
+        ExpressionParser parser
+                = new SpelExpressionParser();
+
+//字符串解析
+        String str = (String) parser.parseExpression("'你好'").getValue();
+        System.out.println(str);
+
+//整型解析
+        int intVal = (Integer) parser.parseExpression("0x2F").getValue();
+        System.out.println(intVal);
+
+//双精度浮点型解析
+        double doubleVal = (Double) parser.parseExpression("4329759E+22").getValue();
+        System.out.println(doubleVal);
+
+
+//布尔型解析
+        boolean booleanVal = (boolean) parser.parseExpression("true").getValue();
+        System.out.println(booleanVal);
+
     }
 }
