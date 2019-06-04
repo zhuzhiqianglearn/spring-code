@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.MyBatisDemo.UserMapper;
+import com.example.demo.aspectj.TestBean;
 import com.example.demo.aware.TestAware;
 import com.example.demo.beanFactoryPostProcessor.TestDemo;
 import com.example.demo.beanspel.BeanspelB;
@@ -7,6 +9,9 @@ import com.example.demo.byType.BytypeA;
 import com.example.demo.customapplication.MyApplication;
 import com.example.demo.customtg.User;
 import com.example.demo.event.TestExample;
+import com.example.demo.event.book.TestEvent;
+import com.example.demo.jdbc.JdbcUser;
+import com.example.demo.jdbc.UserServerImp;
 import com.example.demo.lookup.AbstactUser;
 import com.example.demo.lookup.LookUpCOnfig;
 import com.example.demo.property.PropertyA;
@@ -116,7 +121,45 @@ public class test {
         applicationContext.registerShutdownHook();
     }
     @Test
+    public void bbbbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanEvent.xml");
+        System.out.println(11111);
+        TestEvent event=new TestEvent("hello","event");
+        applicationContext.publishEvent(event);
+    }
+    @Test
+    public void bbbbbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanAspectJ.xml");
+        TestBean bean = applicationContext.getBean(TestBean.class);
+        bean.testAspectJ();
+    }
+
+    @Test
+    public void bbbbbbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanJdbc.xml");
+        UserServerImp bean = applicationContext.getBean(UserServerImp.class);
+//       bean.save(new JdbcUser(1,"zzq",18,"nan"));
+        List<JdbcUser> user = bean.getUser();
+    }
+    @Test
+    public void bbbbbbbbbbb(){
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanMabatisConfig.xml");
+        UserMapper bean = applicationContext.getBean(UserMapper.class);
+//       bean.save(new JdbcUser(1,"zzq",18,"nan"));
+        bean.insertUser(new com.example.demo.MyBatisDemo.User(0,"zzqm",10008,"nann"));
+    }
+
+    @Test
+    public void bbbbbbbbbbbbb() throws Exception {
+        ClassPathXmlApplicationContext applicationContext=new ClassPathXmlApplicationContext("classpath:beanJdbcShiwu.xml");
+        UserServerImp bean = applicationContext.getBean(UserServerImp.class);
+       bean.save(new JdbcUser(1,"zzq",18,"nan"));
+//        List<JdbcUser> user = bean.getUser();
+    }
+    @Test
     public void c(){
+        List<String> names2=null;
+        System.out.println(names2==null?0:names2.size());
         List<String> names=new ArrayList<>();
         names.add("1");
         names.add("2");
@@ -150,6 +193,6 @@ public class test {
 //布尔型解析
         boolean booleanVal = (boolean) parser.parseExpression("true").getValue();
         System.out.println(booleanVal);
-
     }
+
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.MyBatisDemo.UserMapper">
+
+    <!-- 插入记录 // 主键生成方式 01:UUID 02:自增 -->
+    <insert id="insertUser" parameterType="Object" >
+        <!-- <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id" >
+                   /*master*/Select nextval('D_DEBTOR_ADDRESS_SEQ') From dual
+                 </selectKey> -->
+        insert into user(name,age,sex)
+        values(#{name},#{age},#{sex})
+    </insert>
+
+</mapper>
